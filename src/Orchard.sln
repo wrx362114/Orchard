@@ -276,6 +276,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Conditions", "Orcha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Resources", "Orchard.Web\Modules\Orchard.Resources\Orchard.Resources.csproj", "{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.LearnOrchard.FeaturedProduct", "Orchard.Web\Modules\Orchard.LearnOrchard.FeaturedProduct\Orchard.LearnOrchard.FeaturedProduct.csproj", "{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1102,6 +1104,16 @@ Global
 		{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Coverage|Any CPU.Build.0 = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.FxCop|Any CPU.Build.0 = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4A2D65-4034-41C7-A0E9-CB8CA10CB051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

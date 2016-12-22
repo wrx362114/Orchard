@@ -1,0 +1,41 @@
+﻿@using Orchard.Utility.Extensions;
+@using Orchard.ContentManagement;
+@{
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    ContentItem contentItem = Model.ContentItem;
+    List<Orchard.ContentManagement.ContentPart> parts = Model.ContentItem.Parts;
+    var ywfields = parts.SingleOrDefault(a => a.PartDefinition.Name == "YwartField");
+
+
+    dynamic titlePart = parts.FirstOrDefault(m => m.PartDefinition.Name== "TitlePart");
+    dynamic commonPart = parts.FirstOrDefault(m => m.PartDefinition.Name == "CommonPart");
+    var viewModel = new
+    {
+        PublishDate = commonPart.PublishedUtc ?? DateTime.Now,
+        Title = titlePart.Title,
+        Author = (ywfields.Fields.FirstOrDefault(m => m.Name == "Author") as Orchard.Core.Common.Fields.TextField).Value,
+        PreviewImgUrl = (ywfields.Fields.FirstOrDefault(m => m.Name == "PrieviewImg4List") as Orchard.Core.Common.Fields.TextField).Value,
+        Summary = (ywfields.Fields.FirstOrDefault(m => m.Name.ToLower() == "summary") as Orchard.Core.Common.Fields.TextField).Value
+    };
+    var urlField = (ywfields.Fields.FirstOrDefault(m => m.Name == "StaticLink") as Orchard.Core.Common.Fields.TextField);
+    string url = null;
+    if (urlField != null)
+    {
+        url = urlField.Value;
+    }
+}
+<article class="content-item @contentTypeClassName spec-index-item">
+    <a href="@(string.IsNullOrEmpty(url)? Url.ItemDisplayUrl(contentItem):url)">
+        <div class="previewimg">
+            <img src="@Html.Raw(viewModel.PreviewImgUrl)" alt="@viewModel.Title 预览图" />
+        </div>
+        <div class="info">
+            <div class="detail">
+                <span class="author">@viewModel.Author</span><span class="publish">　@((commonPart.PublishedUtc ?? DateTime.Now).ToString("yyyy-MM-dd"))</span>
+            </div>
+            <div class="summary">
+                @viewModel.Summary
+            </div>
+        </div>
+    </a>
+</article>

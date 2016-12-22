@@ -1,0 +1,247 @@
+body {
+    background-color: #f8f8f8;
+    overflow-x: hidden;
+}
+
+article header {
+    width: 150%;
+    background-color: #fff;
+    position: absolute;
+    left: -25%;
+}
+
+    article header h1 {
+        display: none;
+    }
+
+.table {
+    background-color: #f8f8f8 !important;
+}
+
+.banner_img {
+    color: #333;
+    max-width: 940px;
+    margin: 0 auto 65px;
+    position: relative;
+    top: 60px;
+}
+
+    .banner_img .row:first-of-type .span-12.cell {
+        padding: 0 !important;
+    }
+
+.topic01, .topic02 {
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+.topic-text01 h1 {
+    margin: 80px 0 15px;
+}
+
+.topic-text02 h1 {
+    margin: 15px 0;
+}
+
+    .topic-text01 h1 span, .topic-text02 h1 span {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+.topic-text01 h1 + p {
+    width: 84%;
+    margin: 0 auto 80px;
+}
+
+    .topic-text01 h1 + p span {
+        font-size: 14px;
+        line-height: 2.14;
+    }
+
+
+
+.media-reports {
+    margin-top: 12px;
+    font-size: 12px;
+    padding: 10px;
+    letter-spacing: 1.3px;
+    color: #999;
+    position: relative;
+}
+
+.media-reports02 {
+    position: relative;
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+    .media-reports::after, .media-reports02::after {
+        width: 48%;
+        border-top: 1px dotted #979797;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+.media-reports p + p {
+    margin: 80px 0;
+}
+
+.media-reports + p, .media-reports02 + div p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+}
+
+.topstorytext, .story .text {
+    display: none;
+}
+
+.row .cell:first-of-type {
+    padding-left: 10px;
+}
+
+.row .cell:last-of-type {
+    padding-right: 10px;
+}
+
+.article {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+    .article:hover {
+        position: relative;
+        top: -5px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .article .info {
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .article img {
+        width: 100%;
+    }
+
+    .article a {
+        color: #000;
+        font-size: 12px;
+    }
+
+    .article .price {
+        margin-top: 10px;
+        color: #3c948b;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+.topic03 {
+    width: 120%;
+}
+
+.more-works {
+    padding: 0 10px;
+}
+
+    .more-works p {
+        line-height: 40px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        position: relative;
+    }
+
+        .more-works p::after, .more-works p::before {
+            content: '';
+            width: 33%;
+            left: 0;
+            top: 20px;
+            position: absolute;
+            border: dashed 1px #979797;
+        }
+
+        .more-works p::after {
+            left: auto;
+            right: 0;
+        }
+
+    .more-works + .row .span-12 > div {
+        width: 20%;
+        padding: 0 10px;
+        float: left;
+    }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0;
+    }
+
+    article header {
+        display: none;
+    }
+
+    .col-md-12, .cell {
+        padding: 0 !important;
+    }
+
+    #free-layout-root > div {
+        top: 0;
+        margin-bottom: 20px;
+    }
+
+    .about-01 {
+        padding: 0 10px !important;
+    }
+
+    .topic01 .topic-text01 h1 + p {
+        width: 100%;
+        padding-bottom: 35px;
+        margin-bottom: 0;
+    }
+
+    .media-reports {
+        padding: 10px 0;
+    }
+
+        .media-reports p + p {
+            margin: 20px 0;
+            text-align: left !important;
+        }
+
+        .media-reports + p, .media-reports02 + div p {
+            margin-left: 10px;
+        }
+
+    .span-3 {
+        width: 49%;
+    }
+
+        .span-3:nth-child(2n+1) {
+            margin-right: 2%;
+        }
+
+    .article {
+        margin-bottom: 5%;
+    }
+
+    .topic-text02 {
+        padding: 0 10px !important;
+    }
+
+    .topic03 .more-works + .row .span-12 > div {
+        width: 49%;
+        padding: 0;
+    }
+
+        .topic03 .more-works + .row .span-12 > div:nth-child(2n+1) {
+            margin-right: 2%;
+        }
+}
+

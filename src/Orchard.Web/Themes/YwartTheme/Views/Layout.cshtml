@@ -1,0 +1,376 @@
+﻿@functions {
+
+    string CalcuClassify(string[] zoneNames, string classNamePrefix)
+    {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : ""; }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+    Style.Include("css/font-awesome.min.css");
+
+    Style.Include("site.css");
+    Style.Include("site_ywart.css");
+    Style.Include("default-grid.css");
+    Style.Include("share.min.css");
+
+
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+
+    Func<dynamic, dynamic>
+Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+
+    /* Last bit of code to prep the layout wrapper
+    ***************************************************************/
+
+    Model.Id = "layout-wrapper";
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+}	<!-- BindTuning head elements-->
+
+<script type="text/javascript">
+    if ( typeof jQuery == 'undefined' ) {
+        document.write( '<script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/jquery.min.js")"><' + '/script>' );
+    }
+    var style_mobile_path = '@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/styles/css/"))'; // path for mobile nav css files, ORX-specific
+</script>
+<script type="text/javascript">
+    $( 'head' ).append( '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">' );
+</script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="@Href("~/Themes/YwartTheme/js/html5shiv.min.js")"></script>
+  <script src="@Href("~/Themes/YwartTheme/js/respond.min.js")"></script>
+<![endif]-->
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/bootstrap.min.js")'></script>
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/BindMENU.js")'></script>
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/fix-responsive-WP8.js")'></script>
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/initilizations.js")'></script>
+
+
+<!--Apply class to body with browser version-->
+<script type="text/javascript">
+    var nVer = navigator.appVersion;
+    var nAgt = navigator.userAgent;
+    var bN = navigator.appName;
+    var fullV = "" + parseFloat( navigator.appVersion );
+    var majorV = parseInt( navigator.appVersion, 10 );
+    var nameOffset, verOffset, ix;
+    if ( ( verOffset = nAgt.indexOf( "Opera" ) ) !== -1 ) {
+        bN = "Opera"; fullV = nAgt.substring( verOffset + 6 );
+        if ( ( verOffset = nAgt.indexOf( "Version" ) ) !== -1 ) {
+            fullV = nAgt.substring( verOffset + 8 )
+        }
+    } else {
+        if ( ( verOffset = nAgt.indexOf( "MSIE" ) ) !== -1 ) {
+            bN = "IE"; fullV = nAgt.substring( verOffset + 5 )
+        } else {
+            if ( ( verOffset = nAgt.indexOf( "Chrome" ) ) !== -1 ) {
+                bN = "Chrome"; fullV = nAgt.substring( verOffset + 7 )
+            } else {
+                if ( ( verOffset = nAgt.indexOf( "Safari" ) ) !== -1 ) {
+                    bN = "Safari"; fullV = nAgt.substring( verOffset + 7 );
+                    if ( ( verOffset = nAgt.indexOf( "Version" ) ) !== -1 ) {
+                        fullV = nAgt.substring( verOffset + 8 )
+                    }
+                } else {
+                    if ( ( verOffset = nAgt.indexOf( "Firefox" ) ) !== -1 ) {
+                        bN = "Firefox"; fullV = nAgt.substring( verOffset + 8 )
+                    } else {
+                        if ( ( nameOffset = nAgt.lastIndexOf( " " ) + 1 ) < ( verOffset = nAgt.lastIndexOf( "/" ) ) ) {
+                            bN = nAgt.substring( nameOffset, verOffset );
+                            fullV = nAgt.substring( verOffset + 1 );
+                            if ( bN.toLowerCase() == bN.toUpperCase() ) {
+                                bN = navigator.appName
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ( ( ix = fullV.indexOf( ";" ) ) !== -1 ) {
+        fullV = fullV.substring( 0, ix )
+    }
+    if ( ( ix = fullV.indexOf( " " ) ) !== -1 ) {
+        fullV = fullV.substring( 0, ix )
+    }
+    majorV = parseInt( "" + fullV, 10 );
+    if ( isNaN( majorV ) ) {
+        fullV = "" + parseFloat( navigator.appVersion );
+        majorV = parseInt( navigator.appVersion, 10 )
+    }
+    document.getElementsByTagName( "body" )[0].className += " " + bN + " " + bN + majorV + " cmsORX cmsORX1 BT-pk";
+</script>
+@if (Request.QueryString.AllKeys.Any(m => m.ToLower() == "appview"))
+{
+    <style>
+        body {
+            margin-top: 0;
+        }
+
+        #header-nav, .pager, .floatad, article.spec-menu {
+            display: none;
+        }
+    </style>
+}
+<header class='navbar navbar-fixed-top @(Request.QueryString.AllKeys.Any(m=>m.ToLower()== "appview")?"hidden":"")' role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <img src="https://www.ywart.com/svg_file?path=/Content/image/icon_menu.svg&rgb=255,255,255" alt="Alternate Text" />
+            </button>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <div id="MenuH">
+@if (Model.Navigation != null)
+            {@Display(Model.Navigation)}
+            </div>
+        </nav>
+    </div>
+    <div class="logo">
+        <a href="https://www.ywart.com"><img src="https://www.ywart.com/svg_file?path=/Content/image/logo_text.svg&rgb=255,255,255" alt="艺网logo"></a>
+    </div>
+
+</header>
+@if (Model.Featured != null)
+{
+    <div id="bt-pagetitle">
+        <div class="container">
+            <div id="Featured">@Display(Model.Featured)</div>
+
+        </div>
+    </div>
+}
+<div id="topic-header-img-1">
+</div>
+
+<div id="topic-header-img-2">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="bt-content" role="main">
+            @if (Model.BeforeMain != null)
+            {
+                <div class="row">
+                    <div class="col-md-12" runat="server" id="BeforeMain">@Display(Model.BeforeMain)</div>
+                </div>
+            }
+            @if (Model.BeforeContent != null || Model.AsideFirst != null)
+            {
+                <div class="row">
+                    @if (Model.BeforeContent != null)
+                    {<div class="col-md-7" runat="server" id="BeforeContent">@Display(Model.BeforeContent)</div>}
+                    @if (Model.AsideFirst != null)
+                    {<div class="col-md-5" runat="server" id="AsideFirst">@Display(Model.AsideFirst)</div>}
+                </div>
+            }
+            @if (Model.Content != null)
+            {
+                <div class="row">
+                    <div class="col-md-12" runat="server" id="Content">@Display(Model.Content)</div>
+                </div>
+            }
+
+            <div id="taglist">
+            </div>
+            @if (Model.AsideSecond != null || Model.AfterContent != null)
+            {
+                <div class="row">
+                    @if (Model.AsideSecond != null)
+                    {<div class="col-md-4" runat="server" id="AsideSecond">@Display(Model.AsideSecond)</div>}
+                    @if (Model.AfterContent != null)
+                    {<div class="col-md-8" runat="server" id="AfterContent">@Display(Model.AfterContent)</div>}
+                </div>
+            }
+            @if (Model.AfterMain != null)
+            {
+                <div class="row">
+                    <div class="col-md-12" runat="server" id="AfterMain">@Display(Model.AfterMain)</div>
+                </div>
+            }
+            @if (Model.TripelFirst != null || Model.TripelSecond != null || Model.TripelThird != null)
+            {
+                <div class="row">
+                    @if (Model.TripelFirst != null)
+                    {<div class="col-md-4" runat="server" id="TripelFirst">@Display(Model.TripelFirst)</div>}
+                    @if (Model.TripelSecond != null)
+                    {<div class="col-md-4" runat="server" id="TripelSecond">@Display(Model.TripelSecond)</div>}
+                    @if (Model.TripelThird != null)
+                    {<div class="col-md-4" runat="server" id="TripelThird">@Display(Model.TripelThird)</div>}
+                </div>
+            }
+        </div>
+        @if (Model.Messages != null)
+        {
+            <div class="col-md-12" id="bt-sidebar">
+                <div class="visible-xs visible-sm"><hr></div>
+                <div id="Messages">@Display(Model.Messages)</div>
+            </div>
+        }
+    </div>
+</div>
+<section class="share">
+    <div class="sharebtns">
+        <div id="sharejs"></div>
+        <a class="sharebtn" v=""></a>
+    </div>
+    <a href="javascript:void(0);" class="like" v="">
+        <div class="active" alt="like"></div>
+    </a>
+</section>
+<footer class='pc @(Request.QueryString.AllKeys.Any(m=>m.ToLower()== "appview")?"hidden":"")'>
+    <div class="row clearfix">
+        <ul>
+            <li>
+                <strong>YWART.COM</strong>
+                <a href="https://www.ywart.com/index" rel="nofollow">精选</a>
+                <a href="https://www.ywart.com/buy">购艺术</a>
+                <a href="https://www.ywart.com/User/UserWishList" rel="nofollow">我的珍藏</a>
+            </li>
+            <li>
+                <strong>了解我们</strong>
+                <a href="https://www.ywart.com/about_us">关于我们</a>
+                <a href="https://pages.ywart.com/jobs">工作机会</a>
+                <a href="https://www.ywart.com/Common/WebMap" rel="nofollow">网站地图</a>
+            </li>
+            <li>
+                <strong>支持与帮助</strong>
+                <a href="https://pages.ywart.com/howtobuy">如何购买</a>
+                <a href="https://pages.ywart.com/delivery">物流说明</a>
+                <a href="https://pages.ywart.com/contactus">联系我们</a>
+            </li>
+            <li><strong>合作</strong><a href="https://pages.ywart.com/acquisition">作品征集</a><a href="https://www.ywart.com/Agent/RegStep0">合作伙伴入驻</a></li>
+        </ul>
+        <div class="right_logo">
+            <img src="https://www.ywart.com/svg_file?path=/Content/image/logo_text.svg&amp;rgb=255,255,255" alt="艺网logo">
+            <p>
+                400-605-7033
+            </p>
+            <p>
+                <i class="fa fa-weixin weixin"></i>
+                <img class="weixinShare" src="https://www.ywart.com/Content/image/weixinQRcode.jpg" alt="weixinQRcode">
+                <a href="http://weibo.com/YWARTCOM" rel="nofollow" target="_blank">
+                    <i class="fa fa-weibo"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+    <p>京ICP备16003461号&nbsp;Copyright © 2015-2016 艺网YWART.COM 版权所有</p>
+    <p class="thrid">
+        <script>
+            window.onload = function () {
+                var a = document.getElementById( 'footerLink' );
+                a.onclick = function () {
+                    var c = a.parentNode;
+                    var b = c.className;
+                    if ( b.indexOf( 'showlink' ) > -1 ) {
+                        c.setAttribute( 'class', b.replace( 'showlink', '' ) );
+                    } else {
+                        c.setAttribute( "class", b.concat( " showlink" ) );
+                    }
+                }
+            };
+        </script>
+        <i id="footerLink" class="fa fa-sort-desc"></i>
+        <strong>友情链接</strong>
+        <a href="http://www.zhhdq.com" target="_blank">中华丹青网</a>
+        <a href="http://www.zh88w.com" target="_blank">书法交易网</a>
+        <a href="http://www.bjmrzh.com" target="_blank">书画</a>
+        <a href="http://news.zxart.cn" target="_blank">艺术资讯</a>
+        <a href="http://www.pmv.cn" target="_blank">中华收藏网</a>
+        <a href="http://www.artyy.org" target="_blank">艺缘网</a>
+        <a href="http://www.zghrsh.com" target="_blank">中国华人书画网</a>
+        <a href="http://www.youaila.com/" target="_blank">买购网</a>
+        <a href="http://www.678art.com" target="_blank">书画</a>
+        <a href="http://www.pifashuhua.com/" target="_blank">字画批发</a>
+        <a href="http://www.shuhua100.net" target="_blank">中国书画百强网</a>
+        <a href="http://www.jyzzh.com" target="_blank">集雅斋字画网</a>
+        <a href="http://www.iwame.cn" target="_blank">画美世界</a>
+        <a href="http://www.youfanerbuy.com" target="_blank">有范</a>
+        <a href="http://www.paixie.net/unvercity/" target="_blank">UV官网</a>
+        <a href="http://news.jcang.com.cn/" target="_blank">九藏学院</a>
+        <a href="http://www.126ts.com" target="_blank">淘宝网</a>
+        <a href="http://www.artfon.net" target="_blank">雅风书画网</a>
+        <a href="http://www.cangyigou.com/" target="_blank">艺术品收藏</a>
+    </p>
+</footer>
+<footer class='mobile @(Request.QueryString.AllKeys.Any(m=>m.ToLower()== "appview")?"hidden":"")'>
+    <ul>
+        <li><a href="https://www.ywart.com/buy" rel="nofollow">购艺术&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+        <li><a href="https://www.ywart.com/about_us" rel="nofollow">关于艺网</a></li>
+        <li><a href="http://pages.ywart.com/howtobuy" rel="nofollow">如何购买</a></li>
+        <li><a href="https://www.ywart.com/Common/WebMap" rel="nofollow">网站地图</a></li>
+    </ul>
+    <div class="line"></div>
+    <div class="thrid">
+        <a rel="nofollow" href="http://weibo.com/ywartcom" target="_blank">
+            <img src="https://www.ywart.com/svg_file?path=/Content/image/icon_weibo.svg&amp;rgb=204,204,204">
+        </a>
+        <a rel="nofollow" href="javascript:void(0);">
+            <img src="https://www.ywart.com/svg_file?path=/Content/image/icon_weixin.svg&amp;rgb=204,204,204">
+        </a>
+    </div>
+    <div class="logo">
+        <a href="https://www.ywart.com">
+            <img src="https://www.ywart.com/svg_file?path=/Content/image/logo.svg&amp;rgb=255,255,255">
+        </a>
+    </div>
+    <div class="copyright">
+        <p>
+            <span style="font-size:x-small;">京ICP备16003461号</span>
+        </p>
+        <span style="font-size:x-small;">Copyright © 2015-2016 艺网YWART.COM 版权所有</span>
+    </div>
+</footer>
+<div class="floatad">
+    <div class="logoimg"></div>
+    <div class="text">
+        艺网APP
+        <br />
+        艺术生活方式专家
+    </div>
+    <a class="btn" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.ywart.android">查看更多</a>
+</div>
+<script type="text/javascript">
+    ( function ( $ ) {
+        $( document ).ready( function () {
+            //MovePageTitle
+            if ( typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode ) {
+                $( '.MoveToTitleZone' ).appendTo( '#bt-pagetitle>.container' );
+            }
+        } );
+        var isWeChat = /MicroMessenger/i.test( navigator.userAgent );
+        if ( isWeChat ) {
+            $( ".floatad" ).css("display","block");
+        }
+    } )( jQuery );
+</script>
+
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/ywart.js")'></script>
+<script type="text/javascript">
+
+    ( function ( $ ) {
+        $( "#MenuH .menu" ).BindMENU( { MenuStyle: "DefaultMenu", Orientation: "Horizontal" } );
+    } )( jQuery );
+</script>
+<!-- powered by BIND TUNING 2014 // http://www.bindtuning.com -->
+<script>
+    var _hmt = _hmt || [];
+    ( function () {
+        var hm = document.createElement( "script" );
+        hm.src = "//hm.baidu.com/hm.js?63bac36ac4816381ad2719317fbc75bd";
+        var s = document.getElementsByTagName( "script" )[0];
+        s.parentNode.insertBefore( hm, s );
+    } )();
+</script>
+<script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/social-share.min.js")'></script>
+<script>
+    socialShare( '#sharejs', { image: "", sites: ['weibo', 'qzone', 'qq', 'wechat'] } );
+</script>

@@ -1,0 +1,7 @@
+Name: YwartTheme
+Author: WRX
+Description: Theme customized with BindTuning - Where themes come to life.
+Version: 1.0.0.0
+Tags: business, cms, modern, bindtuning
+Website: http://ywart.com
+Zones: Header, Navigation, Featured, BeforeMain, AsideFirst, Messages, BeforeContent, Content, AfterContent, AsideSecond, AfterMain, TripelFirst, TripelSecond, TripelThird, FooterQuadFirst, FooterQuadSecond, FooterQuadThird, FooterQuadFourth, Footer

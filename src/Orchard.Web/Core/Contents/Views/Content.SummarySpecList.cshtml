@@ -1,0 +1,43 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents
+@using Orchard.Utility.Extensions;
+@{
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    ContentItem contentItem = Model.ContentItem;
+    List<Orchard.ContentManagement.ContentPart> parts = Model.ContentItem.Parts;
+    var ywfields = parts.SingleOrDefault(a => a.PartDefinition.Name == "YwartField");
+    dynamic Author = ywfields.Fields.FirstOrDefault(m => m.Name == "Author");
+    dynamic urlField = ywfields.Fields.FirstOrDefault(m => m.Name == "StaticLink");
+
+    dynamic titlePart = parts.FirstOrDefault(m => m.PartDefinition.Name == "TitlePart");
+    dynamic commonPart = parts.FirstOrDefault(m => m.PartDefinition.Name == "CommonPart");
+
+    dynamic tags = parts.SingleOrDefault(a => a.PartDefinition.Name == "TagsPart");
+    dynamic vc = parts.SingleOrDefault(a => a.PartDefinition.Name == "ViewCountPart");
+    string tagsStr = "";
+    int viewCount = 0;
+    if (tags != null)
+    {
+        tagsStr = string.Join(",", tags.CurrentTags);
+    }
+    if (vc != null)
+    {
+        viewCount = vc.ViewCount;
+    }
+    string url = null;
+    if (urlField != null)
+    {
+        url = urlField.Value;
+    } 
+}
+<Subject>
+    @foreach (Orchard.Core.Common.Fields.TextField field in ywfields.Fields)
+    {
+        @Html.Raw(string.Format("    <{0}><![CDATA[{1}]]></{0}>\r\n", field.Name, field.Value)) 
+    }
+    <Url><![CDATA[@Html.Raw(url ?? Url.ItemDisplayUrl(contentItem))]]></Url>
+    <Title><![CDATA[@Html.Raw(titlePart.Title)]]></Title> 
+    <PublishDate><![CDATA[@Html.Raw((commonPart.PublishedUtc??DateTime.Now).ToString("yyyy-MM-dd"))]]></PublishDate> 
+    <ViewCount><![CDATA[@Html.Raw(viewCount)]]></ViewCount>
+    <Tags><![CDATA[@Html.Raw(tagsStr)]]></Tags>
+</Subject>
