@@ -771,3 +771,6 @@ header > .logo img {
 .viewcount {
     display: none;
 }
+.page > p.text-field {
+    display:none;
+}

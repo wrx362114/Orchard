@@ -5,9 +5,10 @@ body {
 
 article header {
     width: 150%;
-    background-color: #fff;
+    /* background-color: #fff; */
     position: absolute;
     left: -25%;
+    border-bottom: none;
 }
 
     article header h1 {
@@ -178,7 +179,18 @@ article header {
         float: left;
     }
 
+.mobile-main-img {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .pc-main-img{
+        display:none;
+    }
+    .mobile-main-img {
+        display: block;
+    }
+
     .container {
         padding: 0;
     }
@@ -245,6 +257,6 @@ article header {
         }
 }
 
-#main-title{
-    text-align:center;
+#main-title {
+    text-align: center;
 }
