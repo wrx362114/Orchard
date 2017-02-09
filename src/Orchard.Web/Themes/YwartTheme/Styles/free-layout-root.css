@@ -125,7 +125,9 @@ article header {
         padding: 10px;
         background-color: #fff;
     }
-
+     .article .info .main{
+         min-height: 40px;
+    }
     .article img {
         width: 100%;
     }
