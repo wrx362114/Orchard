@@ -168,18 +168,37 @@ LIMIT 0,1".Replace("@id", id.ToString());
         }
         public class HashHelper
         {
-            static Hashids hsArtwork = new Hashids("this is my yishupin 2015 salt");
-            static Hashids hsOrder = new Hashids("this is my dingdan2008 salt");
-            static Hashids hsArtist = new Hashids("this is my yiwang salt");
+            //初始版本
+            static Hashids hsArtwork_v0 = new Hashids("this is my yishupin 2015 salt");
+            static Hashids hsArtist_v0 = new Hashids("this is my yiwang salt");
 
-            public static string GetArtworkHashByID(int p)
+            //20170228修改为v1
+            static Hashids hsArtwork_v1 = new Hashids("this is artwork 2017 salt", alphabet: "abcdefghijklmnopqrstuvwxyz1234567890");
+            static Hashids hsArtist_v1 = new Hashids("this is artist2017 salt", alphabet: "abcdefghijklmnopqrstuvwxyz1234567890");
+
+            static Hashids hsOrder = new Hashids("this is order2017 salt", alphabet: "abcdefghijklmnopqrstuvwxyz1234567890");
+
+            public static string GetArtworkHashByID(long p)
             {
-                return "0" + hsArtwork.Encode(p + 99999);
+                return "1" + hsArtwork_v1.EncodeLong(p + 99999);
             }
 
-            public static int GetArtiworkIDByHash(string key)
+            public static long GetArtworkIDByHash(string key)
             {
-                return hsArtwork.Decode(key.Substring(1))[0] - 99999;
+                char ver = key[0];
+                long result = 0;
+                switch (ver)
+                {
+                    case '0':
+                        result = hsArtwork_v0.DecodeLong(key.Substring(1))[0] - 99999;
+                        break;
+                    case '1':
+                        result = hsArtwork_v1.DecodeLong(key.Substring(1))[0] - 99999;
+                        break;
+                    default:
+                        break;
+                }
+                return result;
             }
 
             /// <summary>
@@ -187,9 +206,9 @@ LIMIT 0,1".Replace("@id", id.ToString());
             /// </summary>
             /// <param name="id"></param>
             /// <returns></returns>
-            public static string GetArtistHashByID(int id)
+            public static string GetArtistHashByID(long id)
             {
-                return "0" + hsArtist.Encode(id + 100000);
+                return "1" + hsArtist_v1.EncodeLong(id + 100000);
             }
 
             /// <summary>
@@ -197,10 +216,44 @@ LIMIT 0,1".Replace("@id", id.ToString());
             /// </summary>
             /// <param name="hash"></param>
             /// <returns></returns>
-            public static int GetArtistIDByHash(string hash)
+            public static long GetArtistIDByHash(string hash)
             {
-                return hsArtist.Decode(hash.Substring(1))[0] - 100000;
+                char ver = hash[0];
+                long result = 0;
+                switch (ver)
+                {
+                    case '0':
+                        result = hsArtist_v0.DecodeLong(hash.Substring(1))[0] - 100000;
+                        break;
+                    case '1':
+                        result = hsArtist_v1.DecodeLong(hash.Substring(1))[0] - 100000;
+                        break;
+                    default:
+                        break;
+                }
+                return result;
             }
+
+            /// <summary>
+            /// 订单ID编码
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns></returns>
+            public static string OrderIdEncode(long id)
+            {
+                return hsOrder.EncodeLong(id + 9999999);
+            }
+
+            /// <summary>
+            /// 订单ID解码
+            /// </summary>
+            /// <param name="code"></param>
+            /// <returns></returns>
+            public static long OrderIdDecode(string code)
+            {
+                return hsOrder.DecodeLong(code)[0] - 9999999;
+            }
+
         }
 
     }
