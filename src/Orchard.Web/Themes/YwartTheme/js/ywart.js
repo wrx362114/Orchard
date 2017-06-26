@@ -47,4 +47,10 @@
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
     }
+    if(/s=cm/.test(window.location.search)){
+        var logo4cmurl="//pages.ywart.com/Media/Default/_Profiles/98c9a695/7b090ae0/logo4cm.png";
+        var hb=$("header[role=banner]");
+        hb.html("<a href='https://www.ywart.com'><img src='//pages.ywart.com/Media/Default/_Profiles/98c9a695/7b090ae0/logo4cm.png' style='width:212px;height:60px;'/></a>");
+        hb.css("cssText","background-color:#fff !important;text-align:center")
+    }
 } );

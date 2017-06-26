@@ -87,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YwartTheme\Filters\LayoutFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TheAdmin\Scripts\admin.js" />
@@ -453,6 +452,9 @@
     <Content Include="YwartTheme\Views\LogOn2.cshtml" />
     <Content Include="YwartTheme\Views\Parts\Product.cshtml" />
     <Content Include="YwartTheme\Views\Widget.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="YwartTheme\Filters\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

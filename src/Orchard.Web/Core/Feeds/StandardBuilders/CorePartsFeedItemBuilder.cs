@@ -25,13 +25,13 @@ namespace Orchard.Core.Feeds.StandardBuilders {
         }
 
         public void Populate(FeedContext context) {
+            
             foreach (var feedItem in context.Response.Items.OfType<FeedItem<ContentItem>>()) {
 
                 var inspector = new ItemInspector(
                     feedItem.Item,
                     _contentManager.GetItemMetadata(feedItem.Item), 
-                    _htmlFilters);
-
+                    _htmlFilters); 
                 // author is intentionally left empty as it could result in unwanted spam
 
                 // add to known formats
@@ -61,6 +61,8 @@ namespace Orchard.Core.Feeds.StandardBuilders {
                     }
 
                     feedItem.Element.Add(guid);
+
+
                 }
                 else {
                     var feedItem1 = feedItem;
