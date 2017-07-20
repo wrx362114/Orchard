@@ -147,9 +147,10 @@ header > .logo {
 
 @media (max-width: 320px) {
     .floatad .text {
-            margin-left: 10px;
-    } 
+        margin-left: 10px;
+    }
 }
+
 header > .logo a {
     display: block;
     position: absolute;
@@ -239,11 +240,11 @@ header > .logo img {
                 footer .row ul li {
                     margin-right: 150px;
                     float: left;
-              
                 }
-                      footer .row ul li:last-of-type{
-                            margin-right: 0;
-                                  }
+
+                    footer .row ul li:last-of-type {
+                        margin-right: 0;
+                    }
 
                     footer .row ul li strong {
                         padding-bottom: 30px;
@@ -771,6 +772,45 @@ header > .logo img {
 .viewcount {
     display: none;
 }
+
 .page > p.text-field {
-    display:none;
+    display: none;
+}
+
+
+@media only screen and (max-device-width : 768px) {
+    #article img {
+        text-align: center;
+        margin: 0px auto;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+        display: block;
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #bt-content {
+        padding: 0;
+    }
+
+    #Content {
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 18px;
+        color: #000;
+        font-weight: 700;
+        line-height: 24px;
+    }
+
+    #wenzhang {
+        font-size: 1px;
+        line-height: 26px;
+        color:#333;
+    }
 }
