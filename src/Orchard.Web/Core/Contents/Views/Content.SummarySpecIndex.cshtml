@@ -27,7 +27,7 @@
 <article class="content-item @contentTypeClassName spec-index-item">
     <a href="@(string.IsNullOrEmpty(url)? Url.ItemDisplayUrl(contentItem):url)">
         <div class="previewimg">
-            <img src="@Html.Raw(viewModel.PreviewImgUrl)" alt="@viewModel.Title 预览图" />
+            <img src="@Html.Raw(viewModel.PreviewImgUrl.Replace("http://","//"))" alt="@viewModel.Title 预览图" />
         </div>
         <div class="info">
             <div class="detail">
