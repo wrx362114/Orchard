@@ -112,6 +112,9 @@ article header {
     padding: 0;
     margin-bottom: 40px;
 }
+    .article .preview {
+        position: relative;
+    }
 
     .article:hover {
         position: relative;
@@ -149,6 +152,18 @@ article header {
     .article .originprice {
         font-size: 0.5em;
         text-decoration: line-through;
+    }
+    .article .preview .sold {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: white;
+        font-size: 14px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 7px;
+        background: #373b37;
+        z-index: 2;
     }
 
 .topic03 {
