@@ -1,8 +1,9 @@
 @functions {
     // To support the layout classification below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
-    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+    string CalcuClassify(string[] zoneNames, string classNamePrefix)
+    {
         var zoneCounter = 0;
-        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : "";}).ToArray());
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : ""; }).ToArray());
         return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
     }
 }
@@ -27,147 +28,187 @@
     Model.Id = "layout-wrapper";
     var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
 }	<!-- BindTuning head elements-->
-	
-	<script type="text/javascript">
+
+<script type="text/javascript">
 		if (typeof jQuery == 'undefined') {document.write('<script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/jquery.min.js")"><' + '/script>');}
 		var style_mobile_path = '@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/styles/css/"))'; // path for mobile nav css files, ORX-specific
-	</script>
-	<script type="text/javascript">
-		$('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">');
-	</script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="@Href("~/Themes/YwartTheme/js/html5shiv.min.js")"></script>
-      <script src="@Href("~/Themes/YwartTheme/js/respond.min.js")"></script>
-    <![endif]-->
-	<script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/bootstrap.min.js")"></script>
+</script>
+<script type="text/javascript">
+        $('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">');
+</script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="@Href("~/Themes/YwartTheme/js/html5shiv.min.js")"></script>
+  <script src="@Href("~/Themes/YwartTheme/js/respond.min.js")"></script>
+<![endif]-->
+<script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/bootstrap.min.js")"></script>
 <script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/BindMENU.js")"></script>
 <script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/fix-responsive-WP8.js")"></script>
 <script type="text/javascript" src="@Href("~/Themes/YwartTheme/js/initilizations.js")"></script>
 
 <script>
-        (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        function runga() {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-77325566-1', 'auto');
-        ga('send', 'pageview');
-
+            ga('create', 'UA-77325566-1', 'auto');
+            ga('send', 'pageview');
+        }
+        if (!@(Request.QueryString.AllKeys.Any(m => m.ToLower() == "appview").ToString().ToLower())) {
+            runga();
+        }
 </script>
-	<!--Apply class to body with browser version-->
-	<script type="text/javascript">
-		var nVer = navigator.appVersion; var nAgt = navigator.userAgent; var bN = navigator.appName; var fullV = "" + parseFloat(navigator.appVersion); var majorV = parseInt(navigator.appVersion, 10); var nameOffset, verOffset, ix; if ((verOffset = nAgt.indexOf("Opera")) !== -1) { bN = "Opera"; fullV = nAgt.substring(verOffset + 6); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("MSIE")) !== -1) { bN = "IE"; fullV = nAgt.substring(verOffset + 5) } else { if ((verOffset = nAgt.indexOf("Chrome")) !== -1) { bN = "Chrome"; fullV = nAgt.substring(verOffset + 7) } else { if ((verOffset = nAgt.indexOf("Safari")) !== -1) { bN = "Safari"; fullV = nAgt.substring(verOffset + 7); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("Firefox")) !== -1) { bN = "Firefox"; fullV = nAgt.substring(verOffset + 8) } else { if ((nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/"))) { bN = nAgt.substring(nameOffset, verOffset); fullV = nAgt.substring(verOffset + 1); if (bN.toLowerCase() == bN.toUpperCase()) { bN = navigator.appName } } } } } } } if ((ix = fullV.indexOf(";")) !== -1) { fullV = fullV.substring(0, ix) } if ((ix = fullV.indexOf(" ")) !== -1) { fullV = fullV.substring(0, ix) } majorV = parseInt("" + fullV, 10); if (isNaN(majorV)) { fullV = "" + parseFloat(navigator.appVersion); majorV = parseInt(navigator.appVersion, 10) } 
-		document.getElementsByTagName("body")[0].className += " " +  bN + " " +  bN + majorV + " cmsORX cmsORX1 BT-pk";
-	</script>
+<!--Apply class to body with browser version-->
+<script type="text/javascript">
+        var nVer = navigator.appVersion; var nAgt = navigator.userAgent; var bN = navigator.appName; var fullV = "" + parseFloat(navigator.appVersion); var majorV = parseInt(navigator.appVersion, 10); var nameOffset, verOffset, ix; if ((verOffset = nAgt.indexOf("Opera")) !== -1) { bN = "Opera"; fullV = nAgt.substring(verOffset + 6); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("MSIE")) !== -1) { bN = "IE"; fullV = nAgt.substring(verOffset + 5) } else { if ((verOffset = nAgt.indexOf("Chrome")) !== -1) { bN = "Chrome"; fullV = nAgt.substring(verOffset + 7) } else { if ((verOffset = nAgt.indexOf("Safari")) !== -1) { bN = "Safari"; fullV = nAgt.substring(verOffset + 7); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("Firefox")) !== -1) { bN = "Firefox"; fullV = nAgt.substring(verOffset + 8) } else { if ((nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/"))) { bN = nAgt.substring(nameOffset, verOffset); fullV = nAgt.substring(verOffset + 1); if (bN.toLowerCase() == bN.toUpperCase()) { bN = navigator.appName } } } } } } } if ((ix = fullV.indexOf(";")) !== -1) { fullV = fullV.substring(0, ix) } if ((ix = fullV.indexOf(" ")) !== -1) { fullV = fullV.substring(0, ix) } majorV = parseInt("" + fullV, 10); if (isNaN(majorV)) { fullV = "" + parseFloat(navigator.appVersion); majorV = parseInt(navigator.appVersion, 10) }
+        document.getElementsByTagName("body")[0].className += " " + bN + " " + bN + majorV + " cmsORX cmsORX1 BT-pk";
+</script>
 
 <header class="navbar navbar-static-top" role="banner">
-	<div class="container">
-		<div class="navbar-header">
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse"><i class="fa fa-bars"></i></button>
-			<span class="navbar-brand" id="Logo"><h1><a href="~/" title="Go to Home">@WorkContext.CurrentSite.SiteName</a></h1></span>
-   		 </div>
-		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-			<div id="MenuH">@if (Model.Navigation != null) {@Display(Model.Navigation)}</div>
-			<div id="Search" class="hidden-xs">
-				<div class="btn" data-toggle="button"></div>
-				<div id="SearchBar">@using (Html.BeginForm("index", "search", new { area = "Orchard.Search" }, FormMethod.Get, new { @class = "search-form" })){<fieldset><input type="text" value="" name="q" id="q"><button type="submit"></button></fieldset>}</div>
-			</div>
-		</nav>
-	</div>
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse"><i class="fa fa-bars"></i></button>
+            <span class="navbar-brand" id="Logo"><h1><a href="~/" title="Go to Home">@WorkContext.CurrentSite.SiteName</a></h1></span>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <div id="MenuH">
+                @if (Model.Navigation != null)
+            {@Display(Model.Navigation)}
+            </div>
+            <div id="Search" class="hidden-xs">
+                <div class="btn" data-toggle="button"></div>
+                <div id="SearchBar">
+                    @using (Html.BeginForm("index", "search", new { area = "Orchard.Search" }, FormMethod.Get, new { @class = "search-form" }))
+            {<fieldset><input type="text" value="" name="q" id="q"><button type="submit"></button></fieldset>}
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
 
-<main id="bt-slider" role="main">@if (Model.Header != null){<div id="Header">@Display(Model.Header)</div>}</main>
+<main id="bt-slider" role="main">
+    @if (Model.Header != null)
+    {<div id="Header">@Display(Model.Header)</div>}
+</main>
 
 
 
 <div class="container" id="bs-main" role="main">
-	<div id="bt-content"><div class="row">
-	@if (Model.BeforeMain != null){<div class="col-md-12" runat="server" id="BeforeMain">@Display(Model.BeforeMain)</div>}
-</div>
-<div class="row">
-	@if (Model.BeforeContent != null){<div class="col-md-7" runat="server" id="BeforeContent">@Display(Model.BeforeContent)</div>}
-	@if (Model.AsideFirst != null){<div class="col-md-5" runat="server" id="AsideFirst">@Display(Model.AsideFirst)</div>}
-</div>
-<div class="row">
-	
-	
-</div>
-<div class="row">
-	
-	
-</div>
-<div class="row">
-	@if (Model.Content != null){<div class="col-md-12" runat="server" id="Content">@Display(Model.Content)</div>}
-</div>
-<div class="row">
-	
-	
-</div>
-<div class="row">
-	@if (Model.AsideSecond != null){<div class="col-md-4" runat="server" id="AsideSecond">@Display(Model.AsideSecond)</div>}
-	@if (Model.AfterContent != null){<div class="col-md-8" runat="server" id="AfterContent">@Display(Model.AfterContent)</div>}
-</div>
-<div class="row">
-	
-	
-	
-</div>
-<div class="row">
-	@if (Model.AfterMain != null){<div class="col-md-12" runat="server" id="AfterMain">@Display(Model.AfterMain)</div>}
-</div>
-<div class="row">
-	@if (Model.TripelFirst != null){<div class="col-md-4" runat="server" id="TripelFirst">@Display(Model.TripelFirst)</div>}
-	@if (Model.TripelSecond != null){<div class="col-md-4" runat="server" id="TripelSecond">@Display(Model.TripelSecond)</div>}
-	@if (Model.TripelThird != null){<div class="col-md-4" runat="server" id="TripelThird">@Display(Model.TripelThird)</div>}
-</div></div>
+    <div id="bt-content">
+        <div class="row">
+            @if (Model.BeforeMain != null)
+            {<div class="col-md-12" runat="server" id="BeforeMain">@Display(Model.BeforeMain)</div>}
+        </div>
+        <div class="row">
+            @if (Model.BeforeContent != null)
+            {<div class="col-md-7" runat="server" id="BeforeContent">@Display(Model.BeforeContent)</div>}
+            @if (Model.AsideFirst != null)
+            {<div class="col-md-5" runat="server" id="AsideFirst">@Display(Model.AsideFirst)</div>}
+        </div>
+        <div class="row">
+
+
+        </div>
+        <div class="row">
+
+
+        </div>
+        <div class="row">
+            @if (Model.Content != null)
+            {<div class="col-md-12" runat="server" id="Content">@Display(Model.Content)</div>}
+        </div>
+        <div class="row">
+
+
+        </div>
+        <div class="row">
+            @if (Model.AsideSecond != null)
+            {<div class="col-md-4" runat="server" id="AsideSecond">@Display(Model.AsideSecond)</div>}
+            @if (Model.AfterContent != null)
+            {<div class="col-md-8" runat="server" id="AfterContent">@Display(Model.AfterContent)</div>}
+        </div>
+        <div class="row">
+
+
+
+        </div>
+        <div class="row">
+            @if (Model.AfterMain != null)
+            {<div class="col-md-12" runat="server" id="AfterMain">@Display(Model.AfterMain)</div>}
+        </div>
+        <div class="row">
+            @if (Model.TripelFirst != null)
+            {<div class="col-md-4" runat="server" id="TripelFirst">@Display(Model.TripelFirst)</div>}
+            @if (Model.TripelSecond != null)
+            {<div class="col-md-4" runat="server" id="TripelSecond">@Display(Model.TripelSecond)</div>}
+            @if (Model.TripelThird != null)
+            {<div class="col-md-4" runat="server" id="TripelThird">@Display(Model.TripelThird)</div>}
+        </div>
+    </div>
 </div>
 
 
 
 <footer class="bs-footer" role="contentinfo">
-	<div class="container">
-		<div id="bt-footer">@if (Model.Footer != null){<div id="Footer">@Display(Model.Footer)</div>}</div>
-		<div class="footer-links">
-			<span id="Copyright"><span class="Copyright">&copy; 2015 @WorkContext.CurrentSite.SiteName. All rights reserved.</span></span>
-			<span id="Sitemap"></span>
-			<span id="Privacy"></span>
-			<span id="Terms"></span>
-			<span id="Cart"></span>
-			<span id="Login">@if (Request.IsAuthenticated) {
-		<span class="user-actions">
-			@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })
-			@if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel)) {
-				@Html.ActionLink("Dashboard", "Index", new { Area = "Dashboard", Controller = "Admin" })
-			}
-		</span>
-} else {
-		<span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</span>
-}</span>
-			<span id="User">@if (Request.IsAuthenticated) {
-	<span class="welcome">@if(WorkContext.CurrentUser != null){@T("<strong>{0}</strong>", new HtmlString(Html.ActionLink( WorkContext.CurrentUser.UserName, "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" }).ToString()))}</span>
-}</span>
-		</div>
-	</div>
+    <div class="container">
+        <div id="bt-footer">
+            @if (Model.Footer != null)
+            {<div id="Footer">@Display(Model.Footer)</div>}
+        </div>
+        <div class="footer-links">
+            <span id="Copyright"><span class="Copyright">&copy; 2015 @WorkContext.CurrentSite.SiteName. All rights reserved.</span></span>
+            <span id="Sitemap"></span>
+            <span id="Privacy"></span>
+            <span id="Terms"></span>
+            <span id="Cart"></span>
+            <span id="Login">
+                @if (Request.IsAuthenticated)
+            {
+                    <span class="user-actions">
+                        @Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })
+                        @if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel))
+                        {
+                            @Html.ActionLink("Dashboard", "Index", new { Area = "Dashboard", Controller = "Admin" })
+                        }
+                    </span>
+                }
+                else
+                {
+                    <span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</span>
+                }
+            </span>
+            <span id="User">
+                @if (Request.IsAuthenticated)
+            {
+                    <span class="welcome">
+                        @if (WorkContext.CurrentUser != null)
+                {@T("<strong>{0}</strong>", new HtmlString(Html.ActionLink(WorkContext.CurrentUser.UserName, "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" }).ToString()))}
+                    </span>
+                }
+            </span>
+        </div>
+    </div>
 </footer>
 
 <script type="text/javascript">
-		(function ($) {
-			$(document).ready(function () {
-				//MoveSlider
-				if(typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode) {
-					$('.MoveToSliderZone').appendTo('#bt-slider>.container');
-				}
-			});
-		})(jQuery);
+        (function ($) {
+            $(document).ready(function () {
+                //MoveSlider
+                if (typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode) {
+                    $('.MoveToSliderZone').appendTo('#bt-slider>.container');
+                }
+            });
+        })(jQuery);
 </script>
 
-	<script type="text/javascript" >
-	(function( $ ) {
-		$("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
-		$("#MenuV .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
-	})(jQuery);
-	</script>
-	<!-- powered by BIND TUNING 2014 // http://www.bindtuning.com -->
+<script type="text/javascript">
+        (function ($) {
+            $("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
+            $("#MenuV .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
+        })(jQuery);
+</script>
+<!-- powered by BIND TUNING 2014 // http://www.bindtuning.com -->
