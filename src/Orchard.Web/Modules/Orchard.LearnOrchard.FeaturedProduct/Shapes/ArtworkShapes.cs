@@ -137,7 +137,7 @@ LIMIT 0,1".Replace("@id", id.ToString());
         <div class='price'><strong  class='@hasred'>￥@articlePrice </strong><span class='@hidden'>￥@originPrice</span></div>
     </div>
 </article>";
-            return template
+            template = template
                 .Replace("@articleUrl", model.ArticleUrl)
                 .Replace("@previewUrl", model.PreviewImgUrl)
                 .Replace("@authorUrl", model.AuthorUrl)
@@ -151,6 +151,11 @@ LIMIT 0,1".Replace("@id", id.ToString());
                 .Replace("@hidden", model.Price == model.OriginPrice ? "hidden" : "originprice")
                 .Replace("@hasred", model.Price != model.OriginPrice ? "redprice" : "")
                 .Replace("@sold", model.Sold ? "" : "hidden");
+            if (model.IsCollect)
+            {
+                template = template.Replace("￥", "");
+            }
+            return template;
         }
         private class ArticleModel
         {
