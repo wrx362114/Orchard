@@ -77,7 +77,8 @@ namespace Orchard.LearnOrchard.FeaturedProduct.Shapes
     t2.`artist_name` AS `AuthorName`,
     t1.`is_sold` AS `Sold`,
     t1.`price_sale` AS `OPrice`,
-    t1.`is_auction_goods` AS `IsAuctionGoods`
+    t1.`is_auction_goods` AS `IsAuctionGoods`,
+    t1.`is_collect` AS `IsCollect`
 FROM artwork AS t1
 	LEFT JOIN artist AS t2 on t2.Id=t1.artist_id
 WHERE t1.id=@id
@@ -102,6 +103,9 @@ LIMIT 0,1".Replace("@id", id.ToString());
                         model.Sold = !(reader.IsDBNull(10) || reader.GetInt32(10) == 0);
                         model.OriginPrice = reader.IsDBNull(11) ? 0 : reader.GetDecimal(11);
                         model.IsAuctionGoods = reader.IsDBNull(12) ? false : reader.GetBoolean(12);
+                        model.IsCollect = reader.GetBoolean(13);
+
+
                         model.ArticleUrl = "https://www.ywart.com/artworks/" + HashHelper.GetArtworkHashByID(model.Id);
                         model.AuthorUrl = "https://www.ywart.com/artist/" + HashHelper.GetArtistHashByID(model.AuthorId);
                     }
@@ -142,8 +146,8 @@ LIMIT 0,1".Replace("@id", id.ToString());
                 .Replace("@articleType", model.Type)
                 .Replace("@story", model.Story)
                 .Replace("@articleSize", model.Width + "×" + model.Height + "cm")
-                .Replace("@articlePrice",model.IsAuctionGoods?"暂无价格": String.Format("{0:N}", model.Price).Replace(".00", ""))
-                .Replace("@originPrice", model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.OriginPrice).Replace(".00", ""))
+                .Replace("@articlePrice", model.IsCollect ? "vip点击查看" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.Price).Replace(".00", "")))
+                .Replace("@originPrice", model.IsCollect ? "vip点击查看" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.OriginPrice).Replace(".00", "")))
                 .Replace("@hidden", model.Price == model.OriginPrice ? "hidden" : "originprice")
                 .Replace("@hasred", model.Price != model.OriginPrice ? "redprice" : "")
                 .Replace("@sold", model.Sold ? "" : "hidden");
@@ -165,6 +169,7 @@ LIMIT 0,1".Replace("@id", id.ToString());
             public decimal Width { get; set; }
             public string Type { get; set; }
             public bool Sold { get; set; }
+            public bool IsCollect { get; set; }
         }
         public class HashHelper
         {
