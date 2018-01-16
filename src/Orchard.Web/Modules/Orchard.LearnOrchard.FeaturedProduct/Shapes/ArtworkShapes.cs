@@ -146,8 +146,8 @@ LIMIT 0,1".Replace("@id", id.ToString());
                 .Replace("@articleType", model.Type)
                 .Replace("@story", model.Story)
                 .Replace("@articleSize", model.Width + "×" + model.Height + "cm")
-                .Replace("@articlePrice", model.IsCollect ? "vip点击查看" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.Price).Replace(".00", "")))
-                .Replace("@originPrice", model.IsCollect ? "vip点击查看" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.OriginPrice).Replace(".00", "")))
+                .Replace("@articlePrice", model.IsCollect ? "点击购买" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.Price).Replace(".00", "")))
+                .Replace("@originPrice", model.IsCollect ? "点击购买" : (model.IsAuctionGoods ? "暂无价格" : String.Format("{0:N}", model.OriginPrice).Replace(".00", "")))
                 .Replace("@hidden", model.Price == model.OriginPrice ? "hidden" : "originprice")
                 .Replace("@hasred", model.Price != model.OriginPrice ? "redprice" : "")
                 .Replace("@sold", model.Sold ? "" : "hidden");
