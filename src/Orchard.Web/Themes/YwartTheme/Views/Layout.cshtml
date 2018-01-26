@@ -40,7 +40,8 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
     var style_mobile_path = '@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/styles/css/"))'; // path for mobile nav css files, ORX-specific
 </script>
 <script type="text/javascript">
-    $( 'head' ).append( '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">' );
+    $('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">');
+
 </script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -58,34 +59,34 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
     var nVer = navigator.appVersion;
     var nAgt = navigator.userAgent;
     var bN = navigator.appName;
-    var fullV = "" + parseFloat( navigator.appVersion );
-    var majorV = parseInt( navigator.appVersion, 10 );
+    var fullV = "" + parseFloat(navigator.appVersion);
+    var majorV = parseInt(navigator.appVersion, 10);
     var nameOffset, verOffset, ix;
-    if ( ( verOffset = nAgt.indexOf( "Opera" ) ) !== -1 ) {
-        bN = "Opera"; fullV = nAgt.substring( verOffset + 6 );
-        if ( ( verOffset = nAgt.indexOf( "Version" ) ) !== -1 ) {
-            fullV = nAgt.substring( verOffset + 8 )
+    if ((verOffset = nAgt.indexOf("Opera")) !== -1) {
+        bN = "Opera"; fullV = nAgt.substring(verOffset + 6);
+        if ((verOffset = nAgt.indexOf("Version")) !== -1) {
+            fullV = nAgt.substring(verOffset + 8)
         }
     } else {
-        if ( ( verOffset = nAgt.indexOf( "MSIE" ) ) !== -1 ) {
-            bN = "IE"; fullV = nAgt.substring( verOffset + 5 )
+        if ((verOffset = nAgt.indexOf("MSIE")) !== -1) {
+            bN = "IE"; fullV = nAgt.substring(verOffset + 5)
         } else {
-            if ( ( verOffset = nAgt.indexOf( "Chrome" ) ) !== -1 ) {
-                bN = "Chrome"; fullV = nAgt.substring( verOffset + 7 )
+            if ((verOffset = nAgt.indexOf("Chrome")) !== -1) {
+                bN = "Chrome"; fullV = nAgt.substring(verOffset + 7)
             } else {
-                if ( ( verOffset = nAgt.indexOf( "Safari" ) ) !== -1 ) {
-                    bN = "Safari"; fullV = nAgt.substring( verOffset + 7 );
-                    if ( ( verOffset = nAgt.indexOf( "Version" ) ) !== -1 ) {
-                        fullV = nAgt.substring( verOffset + 8 )
+                if ((verOffset = nAgt.indexOf("Safari")) !== -1) {
+                    bN = "Safari"; fullV = nAgt.substring(verOffset + 7);
+                    if ((verOffset = nAgt.indexOf("Version")) !== -1) {
+                        fullV = nAgt.substring(verOffset + 8)
                     }
                 } else {
-                    if ( ( verOffset = nAgt.indexOf( "Firefox" ) ) !== -1 ) {
-                        bN = "Firefox"; fullV = nAgt.substring( verOffset + 8 )
+                    if ((verOffset = nAgt.indexOf("Firefox")) !== -1) {
+                        bN = "Firefox"; fullV = nAgt.substring(verOffset + 8)
                     } else {
-                        if ( ( nameOffset = nAgt.lastIndexOf( " " ) + 1 ) < ( verOffset = nAgt.lastIndexOf( "/" ) ) ) {
-                            bN = nAgt.substring( nameOffset, verOffset );
-                            fullV = nAgt.substring( verOffset + 1 );
-                            if ( bN.toLowerCase() == bN.toUpperCase() ) {
+                        if ((nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/"))) {
+                            bN = nAgt.substring(nameOffset, verOffset);
+                            fullV = nAgt.substring(verOffset + 1);
+                            if (bN.toLowerCase() == bN.toUpperCase()) {
                                 bN = navigator.appName
                             }
                         }
@@ -94,16 +95,16 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
             }
         }
     }
-    if ( ( ix = fullV.indexOf( ";" ) ) !== -1 ) {
-        fullV = fullV.substring( 0, ix )
+    if ((ix = fullV.indexOf(";")) !== -1) {
+        fullV = fullV.substring(0, ix)
     }
-    if ( ( ix = fullV.indexOf( " " ) ) !== -1 ) {
-        fullV = fullV.substring( 0, ix )
+    if ((ix = fullV.indexOf(" ")) !== -1) {
+        fullV = fullV.substring(0, ix)
     }
-    majorV = parseInt( "" + fullV, 10 );
-    if ( isNaN( majorV ) ) {
-        fullV = "" + parseFloat( navigator.appVersion );
-        majorV = parseInt( navigator.appVersion, 10 )
+    majorV = parseInt("" + fullV, 10);
+    if (isNaN(majorV)) {
+        fullV = "" + parseFloat(navigator.appVersion);
+        majorV = parseInt(navigator.appVersion, 10)
     }
     document.getElementsByTagName("body")[0].className += " " + bN + " " + bN + majorV + " cmsORX cmsORX1 BT-pk";
 
@@ -145,8 +146,8 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <div id="MenuH">
-@if (Model.Navigation != null)
-            {@Display(Model.Navigation)}
+                @if (Model.Navigation != null)
+                {@Display(Model.Navigation)}
             </div>
         </nav>
     </div>
@@ -283,14 +284,14 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
     <p class="thrid">
         <script>
             window.onload = function () {
-                var a = document.getElementById( 'footerLink' );
+                var a = document.getElementById('footerLink');
                 a.onclick = function () {
                     var c = a.parentNode;
                     var b = c.className;
-                    if ( b.indexOf( 'showlink' ) > -1 ) {
-                        c.setAttribute( 'class', b.replace( 'showlink', '' ) );
+                    if (b.indexOf('showlink') > -1) {
+                        c.setAttribute('class', b.replace('showlink', ''));
                     } else {
-                        c.setAttribute( "class", b.concat( " showlink" ) );
+                        c.setAttribute("class", b.concat(" showlink"));
                     }
                 }
             };
@@ -356,38 +357,41 @@ Zone = x => Display(x); // Zone as an alias for Display to help make it obvious 
     <a class="btn" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.ywart.android">查看更多</a>
 </div>
 <script type="text/javascript">
-    ( function ( $ ) {
-        $( document ).ready( function () {
+    (function ($) {
+        $(document).ready(function () {
             //MovePageTitle
-            if ( typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode ) {
-                $( '.MoveToTitleZone' ).appendTo( '#bt-pagetitle>.container' );
+            if (typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode) {
+                $('.MoveToTitleZone').appendTo('#bt-pagetitle>.container');
             }
-        } );
-        var isWeChat = /MicroMessenger/i.test( navigator.userAgent );
-        if ( isWeChat ) {
-            $( ".floatad" ).css("display","block");
+        });
+        var isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+        if (isWeChat) {
+            $(".floatad").css("display", "block");
         }
-    } )( jQuery );
+        if ($(window).width() > 780) {
+            $(".pc").removeClass("hidden");
+        }
+    })(jQuery);
 </script>
 
 <script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/ywart.js")'></script>
 <script type="text/javascript">
 
-    ( function ( $ ) {
-        $( "#MenuH .menu" ).BindMENU( { MenuStyle: "DefaultMenu", Orientation: "Horizontal" } );
-    } )( jQuery );
+    (function ($) {
+        $("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
+    })(jQuery);
 </script>
 <!-- powered by BIND TUNING 2014 // http://www.bindtuning.com -->
 <script>
     var _hmt = _hmt || [];
-    ( function () {
-        var hm = document.createElement( "script" );
+    (function () {
+        var hm = document.createElement("script");
         hm.src = "//hm.baidu.com/hm.js?63bac36ac4816381ad2719317fbc75bd";
-        var s = document.getElementsByTagName( "script" )[0];
-        s.parentNode.insertBefore( hm, s );
-    } )();
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
 </script>
 <script type="text/javascript" src='@Href("~/Themes/YwartTheme/js/social-share.min.js")'></script>
 <script>
-    socialShare( '#sharejs', { image: "", sites: ['weibo', 'qzone', 'qq', 'wechat'] } );
+    socialShare('#sharejs', { image: "", sites: ['weibo', 'qzone', 'qq', 'wechat'] });
 </script>
