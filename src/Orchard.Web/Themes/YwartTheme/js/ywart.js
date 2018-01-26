@@ -3,7 +3,7 @@
     if (!(window && window.parent && window.parent.location && window.parent.location.href && window.parent.location.href.startsWith("https://www.ywart.com/topic/cms"))) {
         var url = window.location.href;
         url = url.replace("http://", "https://");
-        if (url.length > "https://pages.ywart.com/".length && url != "https://pages.ywart.com/event" && url != "http://pages.ywart.com/news-dana") {
+        if (url.length > "https://pages.ywart.com/".length && url != "https://pages.ywart.com/event" && url != "https://pages.ywart.com/news-dana") {
             window.location.href = "https://www.ywart.com/topic/cms?Url=" + encodeURIComponent(url)
         }
     }
